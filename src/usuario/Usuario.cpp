@@ -9,10 +9,6 @@ int Usuario::getId() {
     return this->id;
 }
 
-void Usuario::setId(int id) {
-    this->id = id;
-}
-
 string Usuario::getNome() {
     return this->nome;
 }

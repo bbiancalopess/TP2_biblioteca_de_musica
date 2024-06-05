@@ -17,7 +17,6 @@ class Usuario {
         
         // getters e setter
         int getId();
-        void setId(int id);
         
         string getNome();
         void setNome(string nome);
