@@ -14,16 +14,17 @@ class Artista : public Usuario {
         vector<Musica> musicas;
         long views;
         vector<Usuario> seguidores;
+        long quantidade_seguidores;
     public:
         // métodos
-        long contarSeguidores();
         void play();
-        void publicarMusica(string nome, string genero, string letra, float duracao, Album album);
-        void publicarMusica(string nome, string genero, string letra, float duracao);
+        void publicarMusica(int id, string nome, string genero, string letra, float duracao, Album album);
+        void publicarMusica(int id, string nome, string genero, string letra, float duracao);
         void excluirMusica(Musica musica);
         void publicarAlbum(string nome);
         void adicionarMusicaAoAlbum(Musica musica, Album album);
         void excluirAlbum(Album album);
+        void increaseSeguidores();
 
         // construtor
         Artista(int id, string nome, string email, string senha);

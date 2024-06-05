@@ -27,12 +27,11 @@ class Musica {
         // getters and setters
         string getNome();
         string getLetra();
-        string getArtista();
+        Artista getArtista();
         string getGenero();
         float getDuracao();
         long getViews();
         Album getAlbum();
-        void setViews(long views);
 };
 
 #endif
