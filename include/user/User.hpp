@@ -1,31 +1,31 @@
-#ifndef USUARIO
-#define USUARIO
+#ifndef USER
+#define USER
 
 #include <string>
 using std::string;
 
-class Usuario {
+class User {
     private:
         int id;
-        string nome;
+        string name;
         string email;
-        string senha;
+        string password;
 
     public:
         // construtor
-        Usuario(int id, string nome, string email, string senha);
+        User(int id, string name, string email, string password);
         
         // getters e setter
         int getId();
         
-        string getNome();
-        void setNome(string nome);
+        string getName();
+        void setName(string name);
 
         string getEmail();
         void setEmail(string email);
 
-        string getSenha();
-        void setSenha(string senha);
+        string getPassword();
+        void setPassword(string password);
 
         // métodos
         void logout();

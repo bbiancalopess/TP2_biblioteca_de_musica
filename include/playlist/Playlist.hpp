@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../usuario/Usuario.hpp"
-#include "../musica/Musica.hpp"
+#include "../user/User.hpp"
+#include "../song/Song.hpp"
 
 using std::string;
 using std::vector;
@@ -12,23 +12,23 @@ using std::vector;
 class Playlist {
     private:
         int id;
-        string nome;
-        vector<Musica> musicas;
-        Usuario criador;
+        string name;
+        vector<Song> songs;
+        User creator;
     public:
         //  métodos
-        void adicionarMusica(Musica musica);
-        void removerMusica(Musica musica);
+        void addSong(Song song);
+        void removeSong(Song song);
         void play();
 
         //  construtor
-        Playlist(int id, string nome, Usuario criador);
+        Playlist(int id, string name, User creator);
 
         //  getters and setters
-        string getNome();
-        vector<Musica> getMusicas();
-        Usuario getCriador();
-        void setNome(string nome);
+        string getName();
+        vector<Song> getSongs();
+        User getCreator();
+        void setName(string name);
 };
 
 #endif

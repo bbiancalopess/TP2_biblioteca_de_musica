@@ -3,25 +3,25 @@
 
 #include <string>
 #include <vector>
-#include "../artista/Artista.hpp"
-#include "../musica/Musica.hpp"
+#include "../artist/Artist.hpp"
+#include "../song/Song.hpp"
 
 using std::string;
 
 class Album {
     private:
         int id;
-        string nome;
-        Artista artista;
-        vector<Musica> musicas;
+        string name;
+        Artist artist;
+        vector<Song> songs;
         long views;
-        float duracao;
+        float duration;
     public:
         // métodos
         void play();
 
         // construtor
-        Album(int id, string nome, Artista artista);
+        Album(int id, string name, Artist artist);
 };
 
 #endif

@@ -1,10 +1,10 @@
 #include "../../include/album/Album.hpp"
 
-Album::Album(int id, string nome, Artista artista)
-    : id(id), nome(nome), artista(artista) {}
+Album::Album(int id, string name, Artist artist)
+    : id(id), name(name), artist(artist) {}
 
-Album::play() {
-    for (int i = 0; i < this->musicas.size(); i++) {
-        this->musicas[i].play();
+void Album::play() {
+    for (int i = 0; i < this->songs.size(); i++) {
+        this->songs[i].play();
     }
 }
