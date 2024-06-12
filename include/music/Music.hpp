@@ -1,11 +1,12 @@
-#ifndef SONG
-#define SONG
+#ifndef MUSIC
+#define MUSIC
 
 #include <string>
 #include "../artist/Artist.hpp"
+#include "../album/Album.hpp"
 using std::string;
 
-class Song {
+class Music {
     private:
         int id;
         string name;
@@ -21,8 +22,8 @@ class Song {
         void increaseViews();
 
         // construtor
-        Song(int id, string name, Artist artist, string genre, string lyrics, float duration);
-        Song(int id, string name, Artist artist, string genre, string lyrics, float duration, Album album);
+        Music(int id, string name, Artist artist, string genre, string lyrics, float duration);
+        Music(int id, string name, Artist artist, string genre, string lyrics, float duration, Album album);
 
         // getters and setters
         string getName();

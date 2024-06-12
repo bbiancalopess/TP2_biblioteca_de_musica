@@ -7,11 +7,11 @@ void Artist::increaseCountFollowers() {
 }
 
 void Artist::play() {
-    for (int i = 0; i < this->songs.size(); i++) {
-        this->songs[i].play();
+    for (int i = 0; i < this->musics.size(); i++) {
+        this->musics[i].play();
     }
 }
-void Artist::publishSong(int id, string name, string genre, string lyrics, float duration, Album album) {
-    Song* new_song = new Song(id, name, *this, genre, lyrics, duration, album);
-    this->songs.push_back(*new_song);
+void Artist::publishmusic(int id, string name, string genre, string lyrics, float duration, Album album) {
+    Music* new_music = new music(id, name, *this, genre, lyrics, duration, album);
+    this->musics.push_back(*new_music);
 }
