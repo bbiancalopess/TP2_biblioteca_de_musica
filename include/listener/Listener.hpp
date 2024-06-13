@@ -17,9 +17,9 @@ class Listener : public User {
         // metodos
         void createPlaylist(string name);
         void deletePlaylist(Playlist playlist);
-        void addToPlaylist(Music music, Playlist playlist);
+        void addToPlaylist(Song song, Playlist playlist);
         void addToPlaylist(Album album, Playlist playlist);
-        void removeFromPlaylist(Music music, Playlist playlist);
+        void removeFromPlaylist(Song song, Playlist playlist);
         string follow(Artist artist);
 
         // construtor

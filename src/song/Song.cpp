@@ -1,47 +1,47 @@
-#include "../../include/music/Music.hpp"
+#include "../../include/song/Song.hpp"
 #include "../../include/artist/Artist.hpp"
 #include <iostream>
 
 using namespace std;
 
-Music::Music(int id, string name, Artist artist, string genre, string lyrics, float duration)
+Song::Song(int id, string name, Artist artist, string genre, string lyrics, float duration)
     : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), duration(duration), views(0) {}
 
-Music::Music(int id, string name, Artist artist, string genre, string lyrics, float duration, Album album)
+Song::Song(int id, string name, Artist artist, string genre, string lyrics, float duration, Album album)
     : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), duration(duration), album(album), views(0) {}
 
-string Music::getName() {
+string Song::getName() {
     return this->name;
 }
 
-string Music::getLyrics() {
+string Song::getLyrics() {
     return this->lyrics;
 }
 
-Artist Music::getArtist() {
+Artist Song::getArtist() {
     return this->artist;
 }
 
-string Music::getGenre(){
+string Song::getGenre(){
     return this->genre;
 }
 
-float Music::getDuration() {
+float Song::getDuration() {
     return this->duration;
 }
 
-long Music::getViews() {
+long Song::getViews() {
     return this->views;
 }
 
-Album Music::getAlbum() {
+Album Song::getAlbum() {
     return this->album;
 }
 
-void Music::play() {
+void Song::play() {
     cout << this->lyrics << endl;
     this->increaseViews();
 }
-void Music::increaseViews() {
+void Song::increaseViews() {
     this->views += 1;
 }
