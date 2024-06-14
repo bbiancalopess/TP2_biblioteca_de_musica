@@ -4,30 +4,33 @@
 #include <string>
 using std::string;
 
+/**
+ * @class User
+ * @brief Represents an user of the system.
+ * @details This class contains informations about an user, including its id, name, email and password.
+ */
 class User {
     private:
-        int id;
-        string name;
-        string email;
-        string password;
+        int id;                 /** Unique identifier for the user. */
+        string name;            /** Name of the user. */
+        string email;           /** Email used to login in the system. */
+        string password;        /** Password used to login in the system. */
 
     public:
-        // construtor
+        /**
+         * @brief Constructor for the User class.
+         * @param id Unique identifier for the album.
+         * @param name Name of the user.
+         * @param email Email used to login in the system.
+         * @param password Password used to login in the system.
+         * @details Initializes an User object with the provided id, name, email and password.
+         */
         User(int id, string name, string email, string password);
-        
-        // getters e setter
-        int getId();
-        
-        string getName();
-        void setName(string name);
 
-        string getEmail();
-        void setEmail(string email);
-
-        string getPassword();
-        void setPassword(string password);
-
-        // métodos
+        /**
+         * @brief Realizes the logout of the user.
+         * @details Realizes the logout of the current user going back to the initial page.
+         */
         void logout();
 };
 
