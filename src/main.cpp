@@ -21,10 +21,10 @@ string get_input(string prompt) {
 
 int main() {
 
-    string entrada = get_input("Digite algo: ");
+    
     int W = 0;
     try {
-        W = stoi(entrada); // string to int
+        W = stoi(opcao); // string to int
     } catch (...) {
         cout << "Invalid input. Please enter a number.\n";
     }
@@ -36,6 +36,14 @@ int main() {
         
         try {
             
+            if
+
+
+
+
+
+
+
             switch (W)
             {
             case 1: //criar usuario

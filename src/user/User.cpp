@@ -6,7 +6,7 @@ User::User(int id, string name, string email, string password)
 
 // getters e setter
 int User::getId() {
-    return this->id;
+    return ;
 }
 
 string User::getName() {
@@ -37,3 +37,4 @@ void User::setPassword(string password) {
 void User::logout(){
 
 }
+
