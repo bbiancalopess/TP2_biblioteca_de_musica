@@ -24,8 +24,9 @@ class System {
          * @param name The name of the new user.
          * @param email The email used to login.
          * @param password The password used to login.
+         * @param userType The user type in the system: 'L' for listener or 'A' for artist
          */
-        void signUp(string name, string email, string password);
+        string signUp(string name, string email, string password, string userType);
         
         /**
          * @brief Realizes the login of an user.
@@ -33,7 +34,7 @@ class System {
          * @param email The email used as the user identifier.
          * @param password The key used to verify if the user is who it claims to be.
          */
-        void login(string email, string password);
+        string login(string email, string password);
 
         /**
          * @brief Puts the system to work

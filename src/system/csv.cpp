@@ -13,12 +13,13 @@ using std::cerr;
 using std::endl;
 using std::stringstream;
 using std::ifstream;
+using std::runtime_error;
 
 void Csv::writeCSV(const string& filename, const vector<vector<string>>& data) {
     ofstream file(filename);
     if (!file.is_open()) {
-        cerr << "Unable to open file for writing: " << filename << endl;
-        return;
+        string err = "Unable to open file for writing: " + filename;
+        throw runtime_error(err);
     }
 
     for (const auto& row : data) {
@@ -38,8 +39,8 @@ vector<vector<string>> Csv::readCSV(const string& filename) {
     vector<vector<string>> data;
     ifstream file(filename);
     if (!file.is_open()) {
-        cerr << "Unable to open file for reading: " << filename << endl;
-        return data;
+        string err = "Unable to open file for reading: " + filename;
+        throw runtime_error(err);
     }
 
     string line;
@@ -56,28 +57,3 @@ vector<vector<string>> Csv::readCSV(const string& filename) {
     file.close();
     return data;
 }
-
-/*
-int main() {
-    vector<vector<string>> data = {
-        {"Name", "Age", "City"},
-        {"Alice", "30", "New York"},
-        {"Bob", "25", "Los Angeles"},
-        {"Charlie", "35", "Chicago"}
-    };
-
-    writeCSV("output.csv", data);
-    std::cout << "CSV file written successfully." << std::endl;
-
-    std::vector<std::vector<std::string>> data = readCSV("output.csv");
-
-    for (const auto& row : data) {
-        for (const auto& col : row) {
-            std::cout << col << " ";
-        }
-        std::cout << "\n";
-    }
-
-    return 0;
-}
-*/
