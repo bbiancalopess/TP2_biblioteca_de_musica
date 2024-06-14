@@ -37,8 +37,8 @@ string funcao () {
 int main () {
     
     System* sistema = new System();
-    //std::cout << sistema->login("admn", "1235") << std::endl;
-    std::cout << sistema->signUp("bianca", "bianca@ufmg.br", "123456", "L") << std::endl;
+    
+    sistema->startTheSystem();
     
     return 0;
 }
