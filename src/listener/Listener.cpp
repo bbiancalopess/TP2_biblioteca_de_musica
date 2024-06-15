@@ -1,21 +1,11 @@
 #include "Listener.hpp"
 
 
-Listener::Listener(int id, string name, string email, string password)
-    : User(id, name, email, password) {}
 
-void Listener::loginOuvinte() {
-    string email = getInput("Digite seu email: ");
-    string password = getInput("Digite sua senha: ");
-    string result = login(email, password);
-    if (result == "loged") {
-        cout << "Logado com sucesso!" << endl;
-    } else if (result == "wrong password") {
-        cout << "Senha incorreta!" << endl;
-    } else if (result == "not registered") {
-        cout << "Usuário não cadastrado!" << endl;
-    }
-}
+Listener::Listener(int id, string name, string email, string password, string userType)
+    : User(id, name, email, password, userType) {}
+
+
 
 void Listener::follow(Artist artist) {
     this->followed_artists.push_back(artist);

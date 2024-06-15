@@ -15,6 +15,7 @@ class User {
         string name;            /** Name of the user. */
         string email;           /** Email used to login in the system. */
         string password;        /** Password used to login in the system. */
+        string userType;        /** Type of the user. */
 
     public:
         /**
@@ -25,7 +26,7 @@ class User {
          * @param password Password used to login in the system.
          * @details Initializes an User object with the provided id, name, email and password.
          */
-        User(int id, string name, string email, string password);
+        User(int id, string name, string email, string password, string userType);
 
         /**
          * @brief Realizes the logout of the user.

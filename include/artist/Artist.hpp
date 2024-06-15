@@ -81,7 +81,7 @@ class Artist : public User {
          * @param password Password used to login into the system.
          * @details Initializes an Artist object with the provided id, name, email and password.
          */
-        Artist(int id, string name, string email, string password);
+        Artist(int id, string name, string email, string password, string userType);
 };
 
 #endif

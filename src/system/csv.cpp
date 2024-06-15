@@ -56,5 +56,8 @@ vector<vector<string>> Csv::readCSV(const string& filename) {
     }
 
     file.close();
+
+    data.erase(data.begin()); // apaga a primeira linha da tabela, a linha dos títulos das colunas
+
     return data;
 }

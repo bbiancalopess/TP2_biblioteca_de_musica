@@ -1,7 +1,8 @@
 #include "../../include/artist/Artist.hpp"
 
-Artist::Artist(int id, string name, string email, string password)
-    : User(id, name, email, password) {}
+Artist::Artist(int id, string name, string email, string password, string userType)
+    : User(id, name, email, password, userType) {}
+    
 void Artist::increaseCountFollowers() {
     this->count_followers += 1;
 }

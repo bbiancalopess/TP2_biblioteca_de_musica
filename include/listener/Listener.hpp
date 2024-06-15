@@ -64,7 +64,7 @@ class Listener : public User {
          * @param password Password used to login.
          * @details Initializes an Listener object with the provided id, name, email and password.
          */
-        Listener(int id, string name, string email, string password);
+        Listener(int id, string name, string email, string password, string userType);
 };
 
 #endif

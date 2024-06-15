@@ -1,8 +1,8 @@
 #include "../../include/user/User.hpp"
 
 // contrutor
-User::User(int id, string name, string email, string password) 
-    : id(id), name(name), email(email), password(password) {}
+User::User(int id, string name, string email, string password, string userType) 
+    : id(id), name(name), email(email), password(password), userType(userType){}
 
 // getters e setter
 int User::getId() {
