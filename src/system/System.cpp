@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../../include/system/System.hpp"
 #include "../../include/system/csv.hpp"
+#include "../../include/user/User.hpp"
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -19,46 +20,41 @@ using std::cin;
 
 string System::login(string email, string password) {
     try {
-        Csv* file = new Csv();
+        Csv* file; // instancia a classe CSV
     
-        vector<vector<string>> data = file->readCSV("../csv/users.csv");
+        vector<vector<string>> data = file->readCSV("../csv/users.csv"); // abre o arquivo
 
-        for (const auto& row : data) {
-            if (row[2] == email) {
-                if (row[3] == password) {
-                    return "loged";
+        for (const auto& row : data) { // pega linha a linha do arquivo
+            if (row[2] == email) { // verifica se o email é igual ao da linha, se não for, passa para a linha seguinte e faz o mesmo
+                if (row[3] == password) { // se o email for igual, verifica se a senha é igual
+                    return "loged"; // se a senha for a certa, o usuário está logado
                 } else {
-                    return "wrong password";
+                    return "wrong password"; // se a senha for diferente, a senha digitada está errada
                 }
             }
         }
 
-        return "not registered";
+        return "not registered"; // caso o email não esteja no arquivo, o usuário não está cadastrado
     } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
+        cerr << err.what() << endl; 
     }
-
 }
-
-                
-                
 
 string getNextId(){
     try {
-        Csv* arquivo = new Csv();
+        Csv* file; // instancia a classe CSV
 
-        vector<vector<string>> users = arquivo->readCSV("../csv/users.csv");
+        vector<vector<string>> users = file->readCSV("../csv/users.csv"); // lê o arquivo
 
-        return to_string(stoi(users[users.size() - 1][0]) + 1);
+        return to_string(stoi(users[users.size() - 1][0]) + 1); // pega o id da última linha do arquivo, sendo esse, o último cadastro
     } catch (const runtime_error& err) {
         cerr << err.what() << endl;
     }
-
 }
 
 string signUp(string name, string email, string password, string userType) {
     try {
-        Csv* file = new Csv();
+        Csv* file;
     
         vector<vector<string>> data = file->readCSV("../csv/users.csv");
 
@@ -73,6 +69,20 @@ string signUp(string name, string email, string password, string userType) {
         cerr << err.what() << endl;
     }   
 
+}
+
+void System::getAllUsers() {
+    try {
+        Csv* file;
+    
+        vector<vector<string>> data = file->readCSV("../csv/users.csv");
+
+        for (const auto& row : data) {
+            this->users.push_back(new User(stoi(row[0]), row[1], row[2], row[3]));
+        }
+    } catch (const runtime_error& err) {
+        cerr << err.what() << endl;
+    }   
 }
 
 string getInput(string prompt) {
@@ -109,7 +119,14 @@ void signUpInfo() {
 
 }
 
+
+
+
+
 void System::startTheSystem() {
+
+    this->getAllUsers();
+
     string opcao;
 
     string inicio = "--------------------------------------------------\n";
