@@ -1,96 +1,44 @@
 #include <iostream>
 #include <string>
-#include <User.hpp>
-#include <Artist.hpp>
+#include "../include/system/csv.hpp"
+#include "../include/system/System.hpp"
 
-using std::cout;
-using std::cin;
-using std::endl;
 using std::string;
 
+string funcao () {
 
-string get_input(string prompt) {
-    string input;
-    cout << prompt;
-    getline(cin, input);
-    return input;
-}
+    vector<vector<string>> data = {
+        {"Id", "Name", "Email", "Password"},
+        {"1", "admin", "admin", "12345"}
+    };
 
+    Csv* arquivos = new Csv();
 
-
-
-int main() {
+    arquivos->writeCSV("../csv/users.csv", data);
 
     
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Invalid input. Please enter a number.\n";
-    }
-    
 
+    std::vector<std::vector<std::string>> data2 = arquivos->readCSV("../csv/users.csv");
 
-
-    while (true) {
-        
-        try {
-            
-            if
-
-
-
-
-
-
-
-            switch (W)
-            {
-            case 1: //criar usuario
-            
-                
-                    int id = 0;
-                    string nome;
-                    string email;
-                    string senha;
-            
-                    nome = get_input("Digite seu nome: ");
-                    email = get_input("Digite seu email: ");
-                    senha = get_input("Digite sua senha: ");
-            
-                    User user(id, nome, email, senha);
-                    addUser(user);
-                
-            
-                break;
-
-            case 2: //remover usuario
-
-                string nome = get_input("Digite o nome do usuario que deseja remover: ");
-                removeUser(nome);
-                break;
-
-            case 3: //listar usuarios
-                listUsers();
-                break;
-            
-            case 4: //remover todos os usuarios
-                removeAllUsers();
-                break;
-            
-            case 5: //criar artista
-
-                
-
-            
-                
-
-
-            default:
-                break;
+    for (const auto& row : data2) {
+        if (row[2] == "admi") {
+            if (row[3] == "12345") {
+                return "login";
+            } else {
+                return "senha errada";
             }
         }
+        std::cout << "\n";
     }
+  
+    return "voce nao esta cadastrado";
+}
 
+int main () {
+    
+    System* sistema = new System();
+    
+    sistema->startTheSystem();
+    
     return 0;
 }
