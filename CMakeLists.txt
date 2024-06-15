@@ -17,8 +17,14 @@ file(GLOB USER_SRC "src/user/*.cpp")
 
 # Add the sources
 set(SOURCES
+    ${USER_SRC}
+    ${LISTENER_SRC}
+    ${ARTIST_SRC}
+    ${SONG_SRC}
+    ${ALBUM_SRC}
+    ${PLAYLIST_SRC}
     ${SYSTEM_SRC}
-    src/main2.cpp
+    src/main.cpp
 )
 
 # Add the executable
