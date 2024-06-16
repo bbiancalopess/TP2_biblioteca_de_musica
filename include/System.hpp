@@ -49,8 +49,18 @@ class System {
          * @details Access the CSV file and get the users of the system.
          */
         void getAllUsers();
-
+        
         void getAllSongs();
+
+        void showListenerOptions();
+        void showArtistOptions();
+        void showMusicOptions();
+        void showPlaylistOptions();
+        void showAlbumOptions();
+        void showFollowedArtistsOptions();
+        void showArtistMusicOptions();
+        void showArtistAlbumOptions();
+        void findMusic(const string& filename, const string& songName);
 };
 
 #endif

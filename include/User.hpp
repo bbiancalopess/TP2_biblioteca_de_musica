@@ -28,6 +28,8 @@ class User {
          */
         User(int id, string name, string email, string password, string userType);
 
+        string checkUserType();
+
         /**
          * @brief Realizes the logout of the user.
          * @details Realizes the logout of the current user going back to the initial page.

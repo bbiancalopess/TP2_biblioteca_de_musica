@@ -225,7 +225,7 @@ void System::showMusicOptions() {
     
     string musica = getInput("Digite o nome da música: ");
     
-    findMusic(musica);
+    findMusic("songs.csv", musica);
     
     switch (W) {
         case 1:
@@ -390,8 +390,7 @@ void System::showArtistOptions() {
                 musica = getInput("Digite o nome da música: ");
                 genre = getInput("Digite o gênero da música: ");
                 lyrics = getInput("Digite a letra da música: ");
-                duration = getInput("Digite a duração da música: ");
-                publishMusic(musica, genre, lyrics, duration);
+                publishMusic(musica, genre, lyrics);
                 break;
             case 4:
                 album = getInput("Digite o nome do álbum: ");
@@ -425,7 +424,7 @@ void System::showArtistMusicOptions() {
         cout << "Entrada inválida \n";
     }
 
-    musica = getInput("Digite o nome da música: ");
+    string musica = getInput("Digite o nome da música: ");
 
     findMusic(musica);
 
@@ -459,7 +458,7 @@ void System::showArtistAlbumOptions() {
     findAlbum(album);
 
     if (W == 1) {
-        musica = getInput("Digite o nome da música a ser adicionada no álbum: ");
+        string musica = getInput("Digite o nome da música a ser adicionada no álbum: ");
         addMusicToAlbum(musica, album);
     } else if (W == 2) {
         deleteAlbum(album);

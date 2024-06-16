@@ -4,6 +4,8 @@
 #include <string>
 #include "Artist.hpp"
 #include "Album.hpp"
+#include "csv.hpp"
+
 using std::string;
 
 /**
@@ -48,6 +50,16 @@ class Song {
 
         int getId();
 
+        /**
+         * @brief Searches for a song in a CSV file.
+         * @param filename Name of the CSV file to be read.
+         * @param songName Name of the song to be searched.
+         * @details Reads the CSV file and searches for the song with the provided name.
+         */
+        void findMusic(const string& filename, const string& songName);
+
+
+        void publishMusic(int id, string name, string genre, string lyrics, float duration);
 };
 
 #endif

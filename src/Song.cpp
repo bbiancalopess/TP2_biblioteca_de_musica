@@ -1,5 +1,5 @@
 #include "Song.hpp"
-#include "Artist.hpp"
+
 #include <iostream>
 
 using namespace std;
@@ -20,3 +20,31 @@ void Song::increaseViews() {
 int Song::getId() {
     return this->id;
 }
+
+void Song::findMusic(const string& filename, const string& songName) {
+    vector<vector<string>> data = readCSV(filename);
+    bool found = false;
+
+    
+    for (const auto& row : data) {
+        if (row.size() > 0 && row[0] == songName) {
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        throw runtime_error("Song not found: " + songName);
+    }
+    
+}
+
+void Song::playMusic(const string& filename, const string& songName) {
+    vector<vector<string >> data = readCSV(filename);
+
+    for (const auto& row : data) {
+        if (row.size() > 0 && row[0] == songName) {
+            cout << row[4] << endl;
+            break;
+        }
+    }
