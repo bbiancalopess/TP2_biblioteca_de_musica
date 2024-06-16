@@ -14,6 +14,13 @@ using std::vector;
  * @details This class contains informations about an user that is an artist, including its albums, songs, total views, followers and count of followers.
  */
 class Artist : public User {
+
+    private: 
+        static int publishedSongs;
+
+    public:
+        static int getpublishedSongs();
+
     private: 
         vector<Album> albums;       /** Albums of the artist. */
         vector<Song> songs;         /** Songs of the artist. */
