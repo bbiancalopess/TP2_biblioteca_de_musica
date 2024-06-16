@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../artist/Artist.hpp"
-#include "../song/Song.hpp"
+#include "Artist.hpp"
+#include "Song.hpp"
 
 using std::string;
 

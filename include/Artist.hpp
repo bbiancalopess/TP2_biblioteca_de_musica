@@ -2,9 +2,9 @@
 #define ARTIST
 
 #include <vector>
-#include "../user/User.hpp"
-#include "../album/Album.hpp"
-#include "../song/Song.hpp"
+#include "User.hpp"
+#include "Album.hpp"
+#include "Song.hpp"
 
 using std::vector;
 
@@ -25,8 +25,6 @@ class Artist : public User {
         vector<Album> albums;       /** Albums of the artist. */
         vector<Song> songs;         /** Songs of the artist. */
         long views;                 /** Total number of views in the artist songs. */
-        vector<User> followers;     /** List of listeners who follow the artist. */
-        long count_followers;       /** Total number of followers. */
     public:
         /**
          * @brief Plays all the songs of the artist.
@@ -73,12 +71,6 @@ class Artist : public User {
          * @param album The album that should be deleted.
          */
         void deleteAlbum(Album album);
-        
-        /**
-         * @brief Increase the variable which counts the artist's followers number.
-         * @details Simulates a new follow to the artist.
-         */
-        void increaseCountFollowers();
 
         /**
          * @brief Constructor for the Artist class.

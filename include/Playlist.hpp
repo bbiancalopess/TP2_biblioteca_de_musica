@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../user/User.hpp"
-#include "../song/Song.hpp"
+#include "Listener.hpp"
+#include "Song.hpp"
 
 using std::string;
 using std::vector;
@@ -18,22 +18,22 @@ class Playlist {
     private:
         int id;                 /** Unique identifier ofr the playlist. */
         string name;            /** Playlist's name. */
-        vector<Song> songs;     /** List of songs in the playlist. */
-        User creator;           /** User that created the playlist. */
+        vector<Song*> songs;     /** List of songs in the playlist. */
+        Listener* creator;           /** User that created the playlist. */
     public:
         /**
          * @brief Adds a song to the playlist.
          * @details Adds a new existing song to the playlist.
          * @param song The song that must be added.
          */
-        void addSong(Song song);
+        void addSong(Song* song);
 
         /**
          * @brief Removes a song from the playlist.
          * @details Deletes a song that was in the playlist.
          * @param song The song that must be removed.
          */
-        void removeSong(Song song);
+        void removeSong(Song* song);
 
         /**
          * @brief Plays all the songs in the playlist.
@@ -48,7 +48,9 @@ class Playlist {
          * @param creator User that created the playlist.
          * @details Initializes an Playlist object with the provided id, name and creator.
          */
-        Playlist(int id, string name, User creator);
+        Playlist(int id, string name, Listener* creator);
+
+        int getId();
 };
 
 #endif

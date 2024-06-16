@@ -33,6 +33,8 @@ class User {
          * @details Realizes the logout of the current user going back to the initial page.
          */
         void logout();
+
+        friend class System;
 };
 
 #endif

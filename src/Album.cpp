@@ -1,4 +1,4 @@
-#include "../../include/album/Album.hpp"
+#include "Album.hpp"
 
 Album::Album(int id, string name, Artist artist)
     : id(id), name(name), artist(artist) {}

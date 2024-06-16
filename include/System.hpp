@@ -3,7 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../user/User.hpp"
+#include "User.hpp"
+#include "Song.hpp"
 
 using std::string;
 using std::vector;
@@ -17,6 +18,7 @@ class System {
     private:
         vector<User*> users;     /** List of all users in the system. */
         long count_users;       /** Number of users in the system. */
+        vector<Song*> songs;
     public:
         /**
          * @brief Realizes the sign-up of an user.
@@ -47,6 +49,8 @@ class System {
          * @details Access the CSV file and get the users of the system.
          */
         void getAllUsers();
+
+        void getAllSongs();
 };
 
 #endif

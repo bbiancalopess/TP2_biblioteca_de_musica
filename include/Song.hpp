@@ -2,8 +2,8 @@
 #define SONG
 
 #include <string>
-#include "../artist/Artist.hpp"
-#include "../album/Album.hpp"
+#include "Artist.hpp"
+#include "Album.hpp"
 using std::string;
 
 /**
@@ -45,6 +45,8 @@ class Song {
          * @details Initializes an Song object with the provided id, name, artist, genre, lyrics and time duration.
          */
         Song(int id, string name, Artist artist, string genre, string lyrics, float duration);
+
+        int getId();
 
 };
 

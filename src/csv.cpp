@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "../../include/system/csv.hpp"
+#include "csv.hpp"
 
 using std::string;
 using std::vector;
@@ -16,7 +16,7 @@ using std::ifstream;
 using std::runtime_error;
 using std::cout;
 
-void Csv::writeCSV(const string& filename, const vector<vector<string>>& data) {
+void writeCSV(const string& filename, const vector<vector<string>>& data) {
     ofstream file(filename); // ofstream abre o arquivo para escrita dando a ele o nome file
     if (!file.is_open()) {
         string err = "Unable to open file for writing: " + filename;
@@ -36,7 +36,7 @@ void Csv::writeCSV(const string& filename, const vector<vector<string>>& data) {
     file.close();
 }
 
-vector<vector<string>> Csv::readCSV(const string& filename) {
+vector<vector<string>> readCSV(const string& filename) {
     vector<vector<string>> data;
     ifstream file(filename); // ifstream é a função que abre o arquivo para leitura dando a ele o nome file
     if (!file.is_open()) {
@@ -57,7 +57,7 @@ vector<vector<string>> Csv::readCSV(const string& filename) {
 
     file.close();
 
-    data.erase(data.begin()); // apaga a primeira linha da tabela, a linha dos títulos das colunas
+    // data.erase(data.begin()); // apaga a primeira linha da tabela, a linha dos títulos das colunas
 
     return data;
 }
