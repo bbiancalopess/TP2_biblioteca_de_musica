@@ -33,6 +33,8 @@ void Artist:: addSongToAlbum(string song, string albun) {
         if (this->albun[i].getId() == albun.getId()) {
             this->albun[i].addSong(song);
             break;
+        }
+    }
 }
 
 void Artist:: deleteAlbum(string albun) {
