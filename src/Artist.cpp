@@ -4,17 +4,19 @@
 int Artist :: publishedSongs = 0;
 
 Artist::Artist(int id, string name, string email, string password, string userType)
-    : User(id, name, email, password, userType) {}
+    : User(id, name, email, password, userType) {
+
+    }
 
 
 
-void Artist::publishSong(int id, string name, string genre, string lyrics, double duration) {
-    Song* new_song = new_song(id, name, *this, genre, lyrics, duration, song);
+void Artist::publishSong(int id, string name, string genre, string lyrics, float duration) {
+    Song* new_song = new song(id, name, *this, genre, lyrics, duration);
         this->songs.push_back(*new_song);
         publishedSongs++;
 }
 
-void Artist::deleteSong(string song) {
+void Artist::deleteSong(Song* song) {
         for (int i = 0; i < this->song.size(); i++) {
             if (this->song[i].getId() == song.getId()) {
                 this->song.erase(this->song.begin() + i);
@@ -24,35 +26,35 @@ void Artist::deleteSong(string song) {
 }
 
 void Artist:: publishAlbum(string name) {
-    Album* new_album = new_album(id, name, genre, lyrics, duration, album);
-         this->albun.push_back(*new_albun);   
+    Album* new_album = new album(id, name, genre, lyrics, duration, album);
+         this->album.push_back(*new_album);   
 } 
 
-void Artist:: addSongToAlbum(string song, string albun) {
-    for (int i = 0; i < this->albun.size(); i++) {
-        if (this->albun[i].getId() == albun.getId()) {
-            this->albun[i].addSong(song);
+void Artist:: addSongToAlbum(Song* song, Album* album) {
+    for (int i = 0; i < this->album.size(); i++) {
+        if (this->album[i].getId() == album.getId()) {
+            this->album[i].addSong(song);
             break;
         }
     }
 }
 
-void Artist:: deleteAlbum(string albun) {
-    for (int i = 0; i < this->albun.size(); i++) {
-        if (this->albun[i].getId() == playlist.getId()) {
-            this->albun.erase(this->albun.begin() + i);
+void Artist:: deleteAlbum(Album* album) {
+    for (int i = 0; i < this->album.size(); i++) {
+        if (this->album[i].getId() == playlist.getId()) {
+            this->album.erase(this->album.begin() + i);
             break;
         }
     }    
 }
 
 void Artist::publishSong(int id, string name, string genre, string lyrics, float duration) {
-    Song* new_song = new song(id, name, *this, genre, lyrics, duration, song);
+    Song* new_song = new song(id, name, *this, genre, lyrics, duration);
         this->songs.push_back(*new_song);
         publishedSongs++;
 }
 
-void Artist::deletesong(Song song) {
+void Artist::deleteSong(Song* song) {
         for (int i = 0; i < this->song.size(); i++) {
             if (this->song[i].getId() == song.getId()) {
                 this->song.erase(this->song.begin() + i);
@@ -63,23 +65,35 @@ void Artist::deletesong(Song song) {
 
 void Artist::publishAlbum(string name) {
     Album* new_album = new album(id, name, genre, lyrics, duration, album);
-        this->album.push_back(*new_albun);   
+        this->album.push_back(*new_album);   
 } 
 
-void Artist:: addSongToAlbum(Song* song, Album* albun) {
-    for (int i = 0; i < this->albun.size(); i++) {
-        if (this->albun[i].getId() == albun.getId()) {
-            this->albun[i].addSong(song);
+void Artist:: addSongToAlbum(Song* song, Album* album) {
+    for (int i = 0; i < this->album.size(); i++) {
+        if (this->album[i].getId() == album.getId()) {
+            this->album[i].addSong(song);
             break;
         }
     }        
 }
 
-void Artist:: deleteAlbum(Album album) {
-    for (int i = 0; i < this->albun.size(); i++) {
-        if (this->albun[i].getId() == playlist.getId()) {
-            this->albun.erase(this->albun.begin() + i);
+void Artist:: deleteAlbum(Album* album) {
+    for (int i = 0; i < this->album.size(); i++) {
+        if (this->album[i].getId() == album.getId()) {
+            this->album.erase(this->album.begin() + i);
             break;
         }
     }        
+}
+
+int Artist :: getpublishedSongs() {
+    return publishedSongs;
+}
+
+void Artist::publishSong(int id, string name, string genre, string lyrics, float duration) {
+    this->song.push_back(new song(id, name, this));
+}
+
+void Artist::publishAlbum(string name) {
+    this->album.push_back(new Album(id, name, this));
 }
