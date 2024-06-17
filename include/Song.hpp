@@ -17,10 +17,9 @@ class Song {
     private:
         int id;             /** Unique identifier for the song. */
         string name;        /** Name of the song. */
-        Artist artist;      /** Artist who published the song. */
+        string artist;      /** Artist who published the song. */
         string genre;       /** Genre of the song. */
         string lyrics;      /** Song's lyrics, used to simulate the playback. */
-        float duration;     /** Time duration of the song, in minutes. */
         long views;         /** Total times that the song was played. */
         Album album;        /** (Optional) Album that the song is a part of. */
     public:
@@ -46,7 +45,7 @@ class Song {
          * @param duration Song's time duration in minutes.
          * @details Initializes an Song object with the provided id, name, artist, genre, lyrics and time duration.
          */
-        Song(int id, string name, Artist artist, string genre, string lyrics, float duration);
+        Song(int id, string name, string artist, string genre, string lyrics, long views);
 
         int getId();
 
@@ -58,8 +57,11 @@ class Song {
          */
         void findMusic(const string& filename, const string& songName);
 
+        void createMusic();
 
         void publishMusic(int id, string name, string genre, string lyrics, float duration);
+
+        void playMusic(const string& filename, const string& songName);
 };
 
 #endif

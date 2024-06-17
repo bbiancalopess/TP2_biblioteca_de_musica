@@ -2,10 +2,11 @@
 
 #include <iostream>
 
+
 using namespace std;
 
-Song::Song(int id, string name, Artist artist, string genre, string lyrics, float duration)
-    : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), duration(duration), views(0) {}
+Song::Song(int id, string name, string artist, string genre, string lyrics, int views)
+    : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), views(0) {}
 
 void Song::play() {
     
@@ -17,9 +18,7 @@ void Song::increaseViews() {
     this->views += 1;
 }
 
-int Song::getId() {
-    return this->id;
-}
+
 
 void Song::findMusic(const string& filename, const string& songName) {
     vector<vector<string>> data = readCSV(filename);
@@ -48,3 +47,4 @@ void Song::playMusic(const string& filename, const string& songName) {
             break;
         }
     }
+

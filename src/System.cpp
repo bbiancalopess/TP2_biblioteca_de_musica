@@ -387,9 +387,7 @@ void System::showArtistOptions() {
                 showArtistAlbumOptions();
                 break;
             case 3:
-                musica = getInput("Digite o nome da música: ");
-                genre = getInput("Digite o gênero da música: ");
-                lyrics = getInput("Digite a letra da música: ");
+                createMusic();
                 publishMusic(musica, genre, lyrics);
                 break;
             case 4:
