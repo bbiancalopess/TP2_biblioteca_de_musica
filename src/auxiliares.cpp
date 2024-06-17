@@ -1,5 +1,6 @@
 #include "auxiliares.hpp"
 #include "Song.hpp"
+#include "Album.hpp"
 
 #include <iostream>
 
@@ -43,7 +44,17 @@ void createMusic() {
     
     Song song(id, name, artist, genre, lyrics, 0);
 
-    void publishMusic(const std::string &filename) const;
+    void publishMusic();
+}
+
+void createAlbum() {
+    int id = getId("albums.csv");
+    string name = getInput("Digite o nome do álbum: ");
+    string artist = getInput("Digite o nome do artista: ");
+    
+    Album album(id, name, artist);
+
+    void publishAlbum();
 }
 
 

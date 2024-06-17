@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <System.hpp>
 #include "auxiliares.hpp"
+#include "Song.hpp"
 
 using std::vector;
 using std::string;
@@ -225,7 +226,7 @@ void System::showMusicOptions() {
     
     string musica = getInput("Digite o nome da música: ");
     
-    findMusic("songs.csv", musica);
+    findMusic(musica);
     
     switch (W) {
         case 1:
@@ -391,8 +392,8 @@ void System::showArtistOptions() {
                 
                 break;
             case 4:
-                album = getInput("Digite o nome do álbum: ");
-                publishAlbum(album);
+                
+                createAlbum();
                 break;
             case 5:
                 listenersNumber();

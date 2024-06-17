@@ -5,6 +5,8 @@
 #include <vector>
 #include "User.hpp"
 #include "Song.hpp"
+#include "csv.hpp"
+#include "auxiliares.hpp"
 
 using std::string;
 using std::vector;

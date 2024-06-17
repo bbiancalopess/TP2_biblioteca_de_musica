@@ -5,6 +5,8 @@
 
 using namespace std;
 
+string filename = "songs.csv";
+
 Song::Song(int id, string name, string artist, string genre, string lyrics, long views)
     : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), views(0) {}
 
@@ -20,13 +22,14 @@ void Song::increaseViews() {
 
 
 
-void Song::findMusic(const string& filename, const string& songName) {
+void Song::findMusic(const string& songName) {
+    
     vector<vector<string>> data = readCSV(filename);
     bool found = false;
 
     
     for (const auto& row : data) {
-        if (row.size() > 0 && row[0] == songName) {
+        if (row.size() > 0 && row[1] == songName) {
             found = true;
             break;
         }
@@ -38,7 +41,7 @@ void Song::findMusic(const string& filename, const string& songName) {
     
 }
 
-void Song::playMusic(const string& filename, const string& songName) {
+void Song::playMusic(const string& songName) {
     vector<vector<string >> data = readCSV(filename);
 
     for (const auto& row : data) {
@@ -51,7 +54,7 @@ void Song::playMusic(const string& filename, const string& songName) {
 
 
 
-void Song::publishMusic(const string &filename) {
+void Song::publishMusic() {
     vector<vector<string>> data = readCSV(filename);
     vector<string> songData = {
         to_string(this->id),
@@ -65,3 +68,27 @@ void Song::publishMusic(const string &filename) {
     data.push_back(songData);
     writeCSV(filename, data);
 }
+
+void Song::playMusic(const string& songName) {
+    vector<vector<string>> data = readCSV(filename);
+
+    for (const auto& row : data) {
+        if (row.size() > 0 && row[1] == songName) {
+            cout << row[4] << endl;
+            break;
+        }
+    }
+}
+
+void Song::deleteMusic(const string& songName) {
+    vector<vector<string>> data = readCSV(filename);
+    vector<vector<string>> newData;
+
+    for (const auto& row : data) {
+        if (row.size() > 0 && row[1] != songName) {
+            newData.push_back(row);
+        }
+    }
+
+    writeCSV(filename, newData);
+} 

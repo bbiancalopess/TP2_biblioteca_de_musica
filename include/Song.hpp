@@ -40,11 +40,11 @@ class Song {
          * @brief Constructor for the Song class.
          * @param id Unique identifier for the song.
          * @param name Name of the song.
-         * @param artist Artist responsible for the song.
-         * @param genre Song's genre.
-         * @param lyrics Lyrics of the song, used to simulate the playback of the song..
-         * @param duration Song's time duration in minutes.
-         * @details Initializes an Song object with the provided id, name, artist, genre, lyrics and time duration.
+         * @param artist Artist who published the song.
+         * @param genre Genre of the song.
+         * @param lyrics Lyrics of the song.
+         * @param views Number of views of the song.
+         * @details Initializes a Song object with the provided id, name, artist, genre, lyrics, and views.
          */
         Song(int id, string name, string artist, string genre, string lyrics, long views);
 
@@ -52,22 +52,26 @@ class Song {
 
         /**
          * @brief Searches for a song in a CSV file.
-         * @param filename Name of the CSV file to be read.
          * @param songName Name of the song to be searched.
          * @details Reads the CSV file and searches for the song with the provided name.
          */
-        void findMusic(const string& filename, const string& songName);
+        void findMusic(const string& songName);
 
-        void playMusic(const string& filename, const string& songName);
+
+
+        void playMusic(const string& songName);
 
         
 
         /**
          * @brief Publishes a song in a CSV file.
-         * @param filename Name of the CSV file to be written.
          * @details Writes the song's information in the CSV file.
          */
-        void publishMusic(const string &filename);
+        void publishMusic();
+
+        void playMusic(const string& songName);
+
+        void deleteMusic(const string& songName);
 };
 
 #endif

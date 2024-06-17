@@ -5,6 +5,8 @@
 #include <vector>
 #include "Artist.hpp"
 #include "Song.hpp"
+#include "csv.hpp"
+#include "auxiliares.hpp"
 
 using std::string;
 
@@ -17,10 +19,10 @@ class Album {
     private:
         int id;                 /** Unique identifier for the album. */
         string name;            /** Name of the album. */
-        Artist artist;          /** Artist responsible for the album. */
+        string artist;          /** Artist responsible for the album. */
         vector<Song> songs;     /** List of songs in the album. */
         long views;             /** Number of views of the album. */
-        float duration;         /** Total duration of the album in minutes */
+        
     public:
         /**
          * @brief Plays all the songs of the album.
@@ -35,7 +37,23 @@ class Album {
          * @param artist Artist responsible for the album.
          * @details Initializes an Album object with the provided id, name, and artist.
          */
-        Album(int id, string name, Artist artist);
+        Album(int id, string name, string artist);
+
+
+        /**
+         * @brief Publishes the album to a CSV file.
+         * @details Writes the album's information to a CSV file.
+         */
+        void publishAlbum();
+
+        /**
+         * @brief Adds a song to the album.
+         * @param song Song to be added to the album.
+         * @details Adds a song to the album's song list.
+         */
+        void addSong(Song song);
+
+
 };
 
 #endif
