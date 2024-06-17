@@ -6,6 +6,7 @@
 
 using std::cout;
 using std::cin;
+using std::string;
 
 string getInput(string prompt) {
     string input;
@@ -34,7 +35,7 @@ int getId(string caminho) {
 
 
 void createMusic() {
-    int id = getId("data/songs.csv");
+    int id = getId("songs.csv");
     string name = getInput("Digite o nome da música: ");
     string artist = getInput("Digite o nome do artista: ");
     string genre = getInput("Digite o gênero da música: ");
@@ -42,4 +43,7 @@ void createMusic() {
     
     Song song(id, name, artist, genre, lyrics, 0);
 
+    void publishMusic(const std::string &filename) const;
 }
+
+

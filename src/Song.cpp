@@ -47,5 +47,21 @@ void Song::playMusic(const string& filename, const string& songName) {
             break;
         }
     }
+}
 
 
+
+void Song::publishMusic(const string &filename) {
+    vector<vector<string>> data = readCSV(filename);
+    vector<string> songData = {
+        to_string(this->id),
+        this->name,
+        this->artist,
+        this->genre,
+        this->lyrics,
+        to_string(this->views)
+    };
+
+    data.push_back(songData);
+    writeCSV(filename, data);
+}

@@ -387,8 +387,8 @@ void System::showArtistOptions() {
                 showArtistAlbumOptions();
                 break;
             case 3:
-                *musica = createMusic();
-                publishMusic();
+                createMusic();
+                
                 break;
             case 4:
                 album = getInput("Digite o nome do álbum: ");

@@ -5,6 +5,7 @@
 #include "Artist.hpp"
 #include "Album.hpp"
 #include "csv.hpp"
+#include "auxiliares.hpp"
 
 using std::string;
 
@@ -57,11 +58,16 @@ class Song {
          */
         void findMusic(const string& filename, const string& songName);
 
-        void createMusic();
-
-        void publishMusic(int id, string name, string genre, string lyrics, float duration);
-
         void playMusic(const string& filename, const string& songName);
+
+        
+
+        /**
+         * @brief Publishes a song in a CSV file.
+         * @param filename Name of the CSV file to be written.
+         * @details Writes the song's information in the CSV file.
+         */
+        void publishMusic(const string &filename);
 };
 
 #endif
