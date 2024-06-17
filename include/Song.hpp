@@ -47,7 +47,7 @@ class Song {
          */
         Song(int id, string name, string artist, string genre, string lyrics, long views);
 
-        int getId();
+        
 
         /**
          * @brief Searches for a song in a CSV file.

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Song::Song(int id, string name, string artist, string genre, string lyrics, int views)
+Song::Song(int id, string name, string artist, string genre, string lyrics, long views)
     : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), views(0) {}
 
 void Song::play() {
@@ -47,4 +47,5 @@ void Song::playMusic(const string& filename, const string& songName) {
             break;
         }
     }
+
 
