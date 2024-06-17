@@ -1,3 +1,4 @@
+#pragma once
 #ifndef LISTENER
 #define LISTENER
 
