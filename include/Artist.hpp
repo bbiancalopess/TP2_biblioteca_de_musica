@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ARTIST
 #define ARTIST
 
@@ -15,6 +16,12 @@ using std::vector;
  */
 class Artist : public User {
 
+    private:
+        static int publishedSongs;
+
+    public:
+        static int getpublishedSongs();
+
     private: 
         static int publishedSongs;
 
@@ -22,8 +29,8 @@ class Artist : public User {
         static int getpublishedSongs();
 
     private: 
-        vector<Album> albums;       /** Albums of the artist. */
-        vector<Song> songs;         /** Songs of the artist. */
+        vector<Album*> albums;       /** Albums of the artist. */
+        vector<Song*> songs;         /** Songs of the artist. */
         long views;                 /** Total number of views in the artist songs. */
     public:
         /**
@@ -48,7 +55,7 @@ class Artist : public User {
          * @details Removes a song from the artist's discography.
          * @param song The song that should be deleted.
          */
-        void deleteSong(Song song);
+        void deleteSong(Song* song);
         
         /**
          * @brief Adds a new album in the artist name.
@@ -63,14 +70,14 @@ class Artist : public User {
          * @param song The song that should be added to the album.
          * @param album The album in which the song will be added.
          */
-        void addSongToAlbum(Song song, Album album);
+        void addSongToAlbum(Song* song, Album* album);
         
         /**
          * @brief Deletes an album.
          * @details Removes an album from the artist discography.
          * @param album The album that should be deleted.
          */
-        void deleteAlbum(Album album);
+        void deleteAlbum(Album* album);
 
         /**
          * @brief Constructor for the Artist class.
