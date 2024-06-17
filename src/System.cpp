@@ -145,6 +145,20 @@ void System::startTheSystem() {
 
     inicio += "-------- BEM-VINDO/A! --------\n";
 
+    void checkUSerType(string userType){
+        for (User* u : this->users) {
+            if (userType == Artist) {
+                return artist;
+            }
+            else if (userType == Ouvinte) {
+                return ouvinte;
+            }
+            else {
+                cout << "Erro ao definir o tipo de usuario"
+                exit (1);
+             }
+        }
+    }
     
     if (checkUserType() == "ouvinte") {
         showListenerOptions();
