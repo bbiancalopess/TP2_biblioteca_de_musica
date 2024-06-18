@@ -48,6 +48,13 @@ class Album {
         void publishAlbum();
 
         /**
+         * @brief Deletes an album from a CSV file.
+         * @param albumName Name of the album to be deleted.
+         * @details Reads the CSV file and deletes the album with the provided name.
+         */
+        void deleteAlbum(const string& albumName);
+
+        /**
          * @brief Adds a song to the album.
          * @param song Song to be added to the album.
          * @details Adds a song to the album's song list.

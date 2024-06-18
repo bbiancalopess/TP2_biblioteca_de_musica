@@ -16,12 +16,6 @@ void Song::play() {
     this->increaseViews();
 }
 
-void Song::increaseViews() {
-    this->views += 1;
-}
-
-
-
 void Song::findMusic(const string& songName) {
     
     vector<vector<string>> data = readCSV(filename);
@@ -39,6 +33,14 @@ void Song::findMusic(const string& songName) {
         throw runtime_error("Song not found: " + songName);
     }
     
+}
+
+void returnMusic() {
+    vector<vector<string>> data = readCSV(filename);
+}
+void someFunction() {
+    string musica = "musicaa";
+    findMusic(musica);
 }
 
 void Song::playMusic(const string& songName) {
@@ -59,8 +61,9 @@ void Song::increaseViews(const string& songName) {
 
     for (const auto& row : data) {
         if (row.size() > 0 && row[1] == songName) {
-            row[5] = stoi(row[5]) + 1;
-            
+            int views = stoi(row[5]);
+            views++;
+            row[5] = to_string(views);
         }
         newData.push_back(row);
     }
@@ -83,6 +86,7 @@ void Song::publishMusic() {
 
     data.push_back(songData);
     writeCSV(filename, data);
+    cout << "Musica adicionada com sucesso"<<endl;
 }
 
 void Song::deleteMusic(const string& songName) {
@@ -97,3 +101,4 @@ void Song::deleteMusic(const string& songName) {
 
     writeCSV(filename, newData);
 } 
+

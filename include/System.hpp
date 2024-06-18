@@ -62,7 +62,7 @@ class System {
         void showFollowedArtistsOptions();
         void showArtistMusicOptions();
         void showArtistAlbumOptions();
-        void findMusic(const string& filename, const string& songName);
+        
 };
 
 #endif

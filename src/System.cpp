@@ -240,7 +240,7 @@ void System::showMusicOptions() {
     
     string musica = getInput("Digite o nome da música: ");
     
-    findMusic(musica);
+    
     
     switch (W) {
         case 1:
