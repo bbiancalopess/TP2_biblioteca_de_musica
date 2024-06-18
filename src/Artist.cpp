@@ -64,7 +64,7 @@ void Artist::deleteSong(Song* song) {
 }
 
 void Artist::publishAlbum(string name) {
-    Album* new_album = new album(id, name, genre, lyrics, duration, album);
+    Album* new_album = new album(id, name, genre, lyrics, album);
         this->album.push_back(*new_album);   
 } 
 
@@ -90,7 +90,7 @@ int Artist :: getpublishedSongs() {
     return publishedSongs;
 }
 
-void Artist::publishSong(int id, string name, string genre, string lyrics, float duration) {
+void Artist::publishSong(int id, string name, string genre, string lyrics) {
     this->song.push_back(new song(id, name, this));
 }
 

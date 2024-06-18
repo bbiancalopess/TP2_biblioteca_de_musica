@@ -32,9 +32,10 @@ class Song {
 
         /**
          * @brief Increase the variable which counts the song's plays number.
+         * @param songName Name of the song to be played.
          * @details Simulates a new play to the song.
          */
-        void increaseViews();
+        void increaseViews(string songName);
 
         /**
          * @brief Constructor for the Song class.

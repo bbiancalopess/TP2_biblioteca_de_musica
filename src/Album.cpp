@@ -9,7 +9,7 @@ void Album::play() {
     }
 }
 
-void publishAlbum() {
+void Album::publishAlbum() {
     vector<vector<string>> data = readCSV("albums.csv");
     vector<string> albumData = {
         std::to_string(this->id),
@@ -20,3 +20,4 @@ void publishAlbum() {
     data.push_back(albumData);
     writeCSV("albums.csv", data);
 }
+

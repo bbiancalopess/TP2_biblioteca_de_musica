@@ -50,6 +50,22 @@ void Song::playMusic(const string& songName) {
             break;
         }
     }
+    increaseViews(songName);
+}
+
+void Song::increaseViews(const string& songName) {
+    vector<vector<string>> data = readCSV(filename);
+    vector<vector<string>> newData;
+
+    for (const auto& row : data) {
+        if (row.size() > 0 && row[1] == songName) {
+            row[5] = stoi(row[5]) + 1;
+            
+        }
+        newData.push_back(row);
+    }
+
+    writeCSV(filename, newData);
 }
 
 
@@ -67,17 +83,6 @@ void Song::publishMusic() {
 
     data.push_back(songData);
     writeCSV(filename, data);
-}
-
-void Song::playMusic(const string& songName) {
-    vector<vector<string>> data = readCSV(filename);
-
-    for (const auto& row : data) {
-        if (row.size() > 0 && row[1] == songName) {
-            cout << row[4] << endl;
-            break;
-        }
-    }
 }
 
 void Song::deleteMusic(const string& songName) {
