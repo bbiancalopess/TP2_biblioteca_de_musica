@@ -21,6 +21,26 @@ void Playlist::play() {
     }
 }
 
-int Playlist::getId(){
-    return this->id;
+
+void Playlist::getName(){
+    return this->name;
 }
+
+void addToPlaylist(Song* song, Playlist* playlist) {
+    // 1. Ler o conteúdo atual do arquivo CSV
+    vector<vector<string>> data = readCSV("playlists.csv");
+
+    // 2. Encontrar a playlist correta pelo nome e adicionar a música
+    bool found = false;
+        for (int i = 0; i < data.size(); i++) {
+            if (row(2) == playlist->getName()) { 
+                data[i].push_back(song->getName() + "," + song->getArtist()); // Adiciona a música à playlist
+                found = true;
+                break;
+            }
+        }
+
+    // 3. Escrever de volta para o arquivo CSV
+    writeCSV(data, "playlists.csv");
+}
+
