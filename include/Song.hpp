@@ -73,6 +73,8 @@ class Song {
         void playMusic(const string& songName);
 
         void deleteMusic(const string& songName);
+
+        friend class System;
 };
 
 #endif

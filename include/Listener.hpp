@@ -49,6 +49,8 @@ class Listener : public User {
          * @details Removes a song from the playlist.
          */
         void removeSongFromPlaylist(Song* song, Playlist* playlist);
+
+        void FollowArtist(Artist* artist);
         
         /**
          * @brief Constructor for the Listener class.
@@ -59,6 +61,7 @@ class Listener : public User {
          * @details Initializes an Listener object with the provided id, name, email and password.
          */
         Listener(int id, string name, string email, string password, string userType);
+        
 };
 
 #endif

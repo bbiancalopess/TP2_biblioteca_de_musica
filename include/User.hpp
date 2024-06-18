@@ -28,7 +28,12 @@ class User {
          */
         User(int id, string name, string email, string password, string userType);
 
-        string checkUserType();
+
+
+        string login(string email, string password) ;
+        string signUp(string name, string email, string password, string userType);
+        atring signUpInfo(System* sistema);
+
 
         /**
          * @brief Realizes the logout of the user.

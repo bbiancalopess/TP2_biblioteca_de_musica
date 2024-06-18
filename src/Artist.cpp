@@ -48,34 +48,3 @@ void Artist::addMusicToAlbum(Song* song, Album& album) {
 }
 
 
-void Artist::publishSong(string song) {
-    vector<vector<string>> data = readCSV(filename);
-    vector<string> songData = {
-        to_string(this->id),
-        this->name,
-        this->artist,
-        this->genre,
-        this->lyrics,
-        to_string(this->views)
-    };
-
-    data.push_back(songData);
-    writeCSV(filename, data);
-
-    std :: cout << "Musica adicionada com sucesso"<<std :: endl;
-}
-
-void Artits ::deleteMusic(const string& songName) {
-    vector<vector<string>> data = readCSV(filename);
-    vector<vector<string>> newData;
-
-    for (const auto& row : data) {
-        if (row.size() > 0 && row[1] != songName) {
-            newData.push_back(row);
-        }
-    }
-
-    writeCSV(filename, newData);
-
-    cout<<"Musica deletada com sucesso"<<endl;
-} 

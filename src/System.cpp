@@ -56,43 +56,39 @@ string System::login(string email, string password) {
     for (User* u : this->users) { // passa pelos usuários do sistema
         if (email == u->email) { // verifica se o email é igual ao da linha, se não for, passa para a linha seguinte e faz o mesmo
             if (password == u->password) { // se o email for igual, verifica se a senha é igual
-                return "logged"; // se a senha for a certa, o usuário está logado
+                cout << "Login feito com sucesso!"; // se a senha for a certa, o usuário está logado
+                return to_string(u->id);
             } else {
-                return "wrong password"; // se a senha for diferente, a senha digitada está errada
+                return "Senha incorreta"; // se a senha for diferente, a senha digitada está errada
             }
         }
     }
 
-    return "not registered"; // caso o email não esteja no arquivo, o usuário não está cadastrado
+    return "Email não registrado"; // caso o email não esteja no arquivo, o usuário não está cadastrado
 }
 
-string getNextUserId(){
-    try {
-        vector<vector<string>> users = readCSV("../csv/users.csv"); // lê o arquivo
 
-        return to_string(stoi(users[users.size() - 1][0]) + 1); // pega o id da última linha do arquivo, sendo esse, o último cadastro
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
-    }
-}
 
 string System::signUp(string name, string email, string password, string userType) {
     try {    
-        vector<vector<string>> data = readCSV("../csv/users.csv");
-
-        vector<string> newData = {getNextUserId(), name, email, password, userType};
+        string caminho = "users.csv";
+        vector<vector<string>> data = readCSV(caminho);
+        string id = to_string(getId(caminho));
+        vector<string> newData = {id, name, email, password, userType};
 
         data.push_back(newData);
 
         writeCSV("../csv/users.csv", data);
-
-        return "cadastrado";
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
+        cout << "Cadastrado com sucesso!" << endl;
+        string a = id;
+        return a;
+    } catch (const std::runtime_error& err) {
+        std::cerr << err.what() << std::endl;
+        return "Erro ao cadastrar!";
     }
 }
 
-void signUpInfo(System* sistema) {
+User signUpInfo(System* sistema) {
     string name = getInput("Digite seu nome: ");
     string email = getInput("Digite seu email: ");
     string password = getInput("Digite sua senha: ");
@@ -100,11 +96,8 @@ void signUpInfo(System* sistema) {
     while(userType != "ouvinte" && userType != "artista"){
         userType = getInput("Digite o tipo de usuário (ouvinte ou artista): ");
     }
-    string result = sistema->signUp(name, email, password, userType);
-    if (result == "cadastrado") {
-        cout << "Cadastrado com sucesso!" << endl;
-    }
-
+    sistema->signUp(name, email, password, userType);
+    return;
 }
 
 void System::startTheSystem() {
@@ -128,15 +121,17 @@ void System::startTheSystem() {
     } catch (...) {
         cout << "Entrada inválida \n";
     }
-
+    string id;
     while (true) {
         try {
             if (W == 1) {
                 signUpInfo(this);
+                string id = to_string(getId("users.csv") - 1);//pega o id do usuário cadastrado. -1 pois a função getId retorna o próximo id disponível
             } else if (W == 2) {
                 string email = getInput("Digite seu email: ");
                 string password = getInput("Digite sua senha: ");
-                string result = login(email, password);
+                id = login(email, password);
+
             }
         } catch (const runtime_error& err) {
             cerr << err.what() << endl;
@@ -144,28 +139,14 @@ void System::startTheSystem() {
     } 
 
     inicio += "-------- BEM-VINDO/A! --------\n";
-
-    void checkUSerType(string userType){
-        for (User* u : this->users) {
-            if (userType == Artist) {
-                return artist;
-            }
-            else if (userType == Ouvinte) {
-                return ouvinte;
-            }
-            else {
-                cout << "Erro ao definir o tipo de usuario"
-                exit (1);
-             }
-        }
-    }
     
-    if (checkUserType() == "ouvinte") {
+    if (checkUserType(id) == "ouvinte") {
         showListenerOptions();
-    } else if (checkUserType() == "artista") {
+    } else if (checkUserType(id) == "artista") {
         showArtistOptions();
     }
 }
+
 
 void System::showListenerOptions() {
     string inicio = "--------------------------------------------------\n\n";
@@ -196,7 +177,7 @@ void System::showListenerOptions() {
 
         switch (W) {
             case 1:
-                musica = getInput("Digite o nome da música: ");
+                
                 showMusicOptions();
                 break;
             case 2:
@@ -205,7 +186,7 @@ void System::showListenerOptions() {
                 break;
             case 3:
                 artista = getInput("Digite o nome do artista: ");
-                showArtistOptions();
+                showSearchArtistOptions();
                 break;
             case 4:
                 showPlaylistOptions();
@@ -281,6 +262,38 @@ void System::showAlbumOptions() {
             break;
         case 2:
             addAlbumToPlaylist(album)
+            break;
+        default:
+            cout << "Entrada inválida \n";
+            break;
+    }
+}
+void System::showMusicOptions() {
+    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
+    inicio += "1. Ver músicas do artista!\n";
+    inicio += "2. Seguir artista!\n";
+    cout << inicio << endl;
+
+    string opcao = getInput("Digite a opção de sua escolha: ");
+    clearScreen();
+
+    int W = 0;
+    try {
+        W = stoi(opcao); // string to int
+    } catch (...) {
+        cout << "Entrada inválida \n";
+    }
+    
+    string musica = getInput("Digite o nome da música: ");
+    
+    
+    
+    switch (W) {
+        case 1:
+            getArtistMusics(artista);
+            break;
+        case 2:
+            followArtist(musica);
             break;
         default:
             cout << "Entrada inválida \n";
