@@ -48,7 +48,7 @@ class Artist : public User {
          * @param lyrics The lyric of the song, the one used to simulate the playback.
          * @param duration Time duration of the song in minutes.
          */
-        void publishSong(int id, string name, string genre, string lyrics, float duration);
+        void publishSong(Song&song);
         
         /**
          * @brief Deletes a song.

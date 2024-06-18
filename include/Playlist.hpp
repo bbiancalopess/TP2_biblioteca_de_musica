@@ -21,12 +21,15 @@ class Playlist {
         vector<Song*> songs;     /** List of songs in the playlist. */
         Listener* creator;           /** User that created the playlist. */
     public:
+
+        void creatPlaylist (int id, string name, Listener* creator);
+        void removePlaylist(int id, string name, Listener* creator);
         /**
          * @brief Adds a song to the playlist.
          * @details Adds a new existing song to the playlist.
          * @param song The song that must be added.
          */
-        void addSong(Song* song);
+        void addMusicToPlaylist(Song* song, Playlist* playlist);
 
         /**
          * @brief Removes a song from the playlist.
