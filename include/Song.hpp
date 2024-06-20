@@ -21,7 +21,6 @@ class Song {
         string artist;      /** Artist who published the song. */
         string genre;       /** Genre of the song. */
         string lyrics;      /** Song's lyrics, used to simulate the playback. */
-        long views;         /** Total times that the song was played. */
         Album album;        /** (Optional) Album that the song is a part of. */
     public:
         /**
@@ -47,7 +46,9 @@ class Song {
          * @param views Number of views of the song.
          * @details Initializes a Song object with the provided id, name, artist, genre, lyrics, and views.
          */
-        Song(int id, string name, string artist, string genre, string lyrics, long views);
+        Song(int id, string name, string artist, string genre, string lyrics);
+
+        virtual void getLyrics();
 
         
 

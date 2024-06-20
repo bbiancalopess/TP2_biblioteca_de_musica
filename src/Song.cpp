@@ -1,4 +1,4 @@
-#include "Song.hpp"
+#include "../include/Song.hpp"
 
 #include <iostream>
 
@@ -7,8 +7,8 @@ using namespace std;
 
 string filename = "songs.csv";
 
-Song::Song(int id, string name, string artist, string genre, string lyrics, long views)
-    : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics), views(0) {}
+Song::Song(int id, string name, string artist, string genre, string lyrics)
+    : id(id), name(name), artist(artist), genre(genre), lyrics(lyrics) {}
 
 void Song::play() {
     
@@ -99,6 +99,10 @@ void Song::deleteMusic(const string& songName) {
 
     cout << "Musica deletada com sucesso" << endl;
 } 
+
+void Song::getLyrics() {
+    cout << this->lyrics << endl;
+}
 
 
 
