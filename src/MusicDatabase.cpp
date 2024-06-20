@@ -23,7 +23,7 @@ void MusicDatabase::removeMusicById(int id) {
         delete *it;
         musics.erase(it);
     } else {
-        throw MusicNotFoundException("Music with ID " + std::to_string(id) + " not found.");
+        throw MusicNotFoundException("Música com ID " + std::to_string(id) + " não encontrada.");
     }
 }
 
@@ -33,12 +33,12 @@ Music* MusicDatabase::searchMusicById(int id) const {
             return music;
         }
     }
-    throw MusicNotFoundException("Music with ID " + std::to_string(id) + " not found.");
+    throw MusicNotFoundException("Música com ID " + std::to_string(id) + " não encontrada.");
 }
 
 void MusicDatabase::displayAllMusics() const {
     if (musics.empty()) {
-        std::cout << "No musics available." << std::endl;
+        std::cout << "Nenhuma música disponível." << std::endl;
         return;
     }
 
