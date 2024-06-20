@@ -1,15 +1,3 @@
-#include <iostream>
-#include "System.hpp"
-#include "csv.hpp"
-#include "User.hpp"
-#include <vector>
-#include <string>
-#include <stdexcept>
-#include <cstdlib>
-#include <System.hpp>
-#include "auxiliares.hpp"
-#include "Song.hpp"
-
 using std::vector;
 using std::string;
 using std::stoi;
@@ -22,473 +10,107 @@ using std::cin;
 
 
 
-void System::getAllUsers() {
-    try {    
-        vector<vector<string>> data = readCSV("../csv/users.csv");
+#include "System.hpp"
 
-        for (const auto& row : data) {
-            this->users.push_back(new User(stoi(row[0]), row[1], row[2], row[3], row[4]));
-        }
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
-    }   
-}
+void System::addMusic() {
+    int type, id;
+    std::string title, lyrics;
 
-string getLyrics(int song_id) {
-    
-}
+    std::cout << "Enter the type of music (1: Pop, 2: Rock, 3: Classical): ";
+    std::cin >> type;
+    std::cout << "Enter ID: ";
+    std::cin >> id;
+    std::cout << "Enter title: ";
+    std::cin.ignore();
+    std::getline(std::cin, title);
+    std::cout << "Enter lyrics: ";
+    std::getline(std::cin, lyrics);
 
-void System::getAllSongs() {
-    try {    
-        vector<vector<string>> data = readCSV("../csv/songs.csv");
-
-        for (const auto& row : data) {
-            this->songs.push_back(new Song());
-        }
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
-    }  
-}
-
-string System::login(string email, string password) {
-    this->getAllUsers();
-
-    for (User* u : this->users) { // passa pelos usuários do sistema
-        if (email == u->email) { // verifica se o email é igual ao da linha, se não for, passa para a linha seguinte e faz o mesmo
-            if (password == u->password) { // se o email for igual, verifica se a senha é igual
-                cout << "Login feito com sucesso!"; // se a senha for a certa, o usuário está logado
-                return to_string(u->id);
-            } else {
-                return "Senha incorreta"; // se a senha for diferente, a senha digitada está errada
-            }
-        }
+    Music* music = nullptr;
+    switch (type) {
+        case 1:
+            music = new PopMusic(id, title, lyrics);
+            break;
+        case 2:
+            music = new RockMusic(id, title, lyrics);
+            break;
+        case 3:
+            music = new ClassicalMusic(id, title, lyrics);
+            break;
+        default:
+            std::cout << "Invalid type!" << std::endl;
+            return;
     }
 
-    return "Email não registrado"; // caso o email não esteja no arquivo, o usuário não está cadastrado
+    database.addMusic(music);
+    std::cout << "Music added successfully!" << std::endl;
 }
 
+void System::removeMusic() {
+    int id;
+    std::cout << "Enter ID of the music to remove: ";
+    std::cin >> id;
 
-
-string System::signUp(string name, string email, string password, string userType) {
-    try {    
-        string caminho = "users.csv";
-        vector<vector<string>> data = readCSV(caminho);
-        string id = to_string(getId(caminho));
-        vector<string> newData = {id, name, email, password, userType};
-
-        data.push_back(newData);
-
-        writeCSV("../csv/users.csv", data);
-        cout << "Cadastrado com sucesso!" << endl;
-        string a = id;
-        return a;
-    } catch (const std::runtime_error& err) {
-        std::cerr << err.what() << std::endl;
-        return "Erro ao cadastrar!";
+    try {
+        database.removeMusicById(id);
+        std::cout << "Music removed successfully!" << std::endl;
+    } catch (const MusicNotFoundException& e) {
+        std::cout << e.what() << std::endl;
     }
 }
 
-User signUpInfo(System* sistema) {
-    string name = getInput("Digite seu nome: ");
-    string email = getInput("Digite seu email: ");
-    string password = getInput("Digite sua senha: ");
-    string userType = getInput("Digite o tipo de usuário (ouvinte ou artista): ");
-    while(userType != "ouvinte" && userType != "artista"){
-        userType = getInput("Digite o tipo de usuário (ouvinte ou artista): ");
+void System::viewMusics() {
+    database.displayAllMusics();
+}
+
+void System::searchMusic() {
+    int id;
+    std::cout << "Enter ID of the music to search: ";
+    std::cin >> id;
+
+    try {
+        Music* music = database.searchMusicById(id);
+        music->display();
+    } catch (const MusicNotFoundException& e) {
+        std::cout << e.what() << std::endl;
     }
-    sistema->signUp(name, email, password, userType);
-    return;
 }
 
 void System::startTheSystem() {
+    int choice;
 
-    
+    do {
+        std::cout << "\nMenu:\n";
+        std::cout << "1. Add Music\n";
+        std::cout << "2. Remove Music\n";
+        std::cout << "3. View All Musics\n";
+        std::cout << "4. Search Music by ID\n";
+        std::cout << "5. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
-    string inicio = "--------------------------------------------------\n";
-    inicio += "-------- ESSA É SUA BIBLIOTECA DE MÚSICAS --------\n";
-    inicio += "--------------------------------------------------\n\n";
-    inicio += "-------------- VOCÊ JÁ É UM USUÁRIO? -------------\n\n";
-    inicio += "1. Não, quero me cadastrar!\n";
-    inicio += "2. Sim, quero fazer log-in!\n";
-    cout << inicio << endl;
-    
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-    string id;
-    while (true) {
-        try {
-            if (W == 1) {
-                signUpInfo(this);
-                string id = to_string(getId("users.csv") - 1);//pega o id do usuário cadastrado. -1 pois a função getId retorna o próximo id disponível
-            } else if (W == 2) {
-                string email = getInput("Digite seu email: ");
-                string password = getInput("Digite sua senha: ");
-                id = login(email, password);
-
-            }
-        } catch (const runtime_error& err) {
-            cerr << err.what() << endl;
-        }
-    } 
-
-    inicio += "-------- BEM-VINDO/A! --------\n";
-    
-    if (checkUserType(id) == "ouvinte") {
-        showListenerOptions();
-    } else if (checkUserType(id) == "artista") {
-        showArtistOptions();
-    }
-}
-
-
-void System::showListenerOptions() {
-    string inicio = "--------------------------------------------------\n\n";
-    inicio += "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Pesquisar uma música!\n";
-    inicio += "2. Pesquisar álbum\n";
-    inicio += "3. Pesquisar artista!\n";
-    inicio += "4. Ver suas Playlists!\n";
-    inicio += "5. Ver artistas seguidos!\n";
-
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    try {
-        string album;
-        string artista;
-        string musica;
-        string playlist;
-
-        switch (W) {
+        switch (choice) {
             case 1:
-                
-                showMusicOptions();
+                addMusic();
                 break;
             case 2:
-                album = getInput("Digite o nome do álbum: ");
-                showAlbumOptions();
+                removeMusic();
                 break;
             case 3:
-                artista = getInput("Digite o nome do artista: ");
-                showSearchArtistOptions();
+                viewMusics();
                 break;
             case 4:
-                showPlaylistOptions();
+                searchMusic();
                 break;
             case 5:
-                showFollowedArtistsOptions();
+                std::cout << "Exiting..." << std::endl;
                 break;
             default:
-                cout << "Entrada inválida \n";
-                break;
+                std::cout << "Invalid choice! Please try again." << std::endl;
         }
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
-    }
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (choice != 5);
 }
 
-void System::showMusicOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Tocar música!\n";
-    inicio += "2. Adicionar música na playlist!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-    
-    string musica = getInput("Digite o nome da música: ");
-    
-    
-    
-    switch (W) {
-        case 1:
-            playMusic(musica);
-            break;
-        case 2:
-            addMusicToPlaylist(musica);
-            break;
-        default:
-            cout << "Entrada inválida \n";
-            break;
-    }
-}
-
-void System::showAlbumOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Tocar álbum inteiro!\n";
-    inicio += "2. Adicionar álbum na playlist!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    string album = getInput("Digite o nome do álbum");
-
-    findAlbum();
-
-    switch (W) {
-        case 1:
-            playAlbum(album)
-            break;
-        case 2:
-            addAlbumToPlaylist(album)
-            break;
-        default:
-            cout << "Entrada inválida \n";
-            break;
-    }
-}
-void System::showMusicOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Ver músicas do artista!\n";
-    inicio += "2. Seguir artista!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-    
-    string musica = getInput("Digite o nome da música: ");
-    
-    
-    
-    switch (W) {
-        case 1:
-            getArtistMusics(artista);
-            break;
-        case 2:
-            followArtist(musica);
-            break;
-        default:
-            cout << "Entrada inválida \n";
-            break;
-    }
-}
-
-void System::showPlaylistOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Tocar Playlist desejada!\n";
-    inicio += "2. Remover música da Playlist desejada!\n";
-    inicio += "3. Renomear Playlist desejada!\n";
-    inicio += "4. Remover Playlist desejada!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    string playlist = getInput("Digite o nome da Playlist: ");
-
-    findPlaylist(playlist);
-
-    string musica;
-    string novoNome;
-
-    switch (W) {
-        case 1:
-            playPlaylist(playlist);
-            break;
-        case 2:
-            musica = getInput("Digite o nome da música a ser removida da Playlist: ");
-            removeMusicFromPlaylist(musica, playlist);
-            break;
-        case 3:
-            novoNome = getInput("Digite o novo nome da Playlist: ");
-            renamePlaylist(playlist, novoNome);
-            break;
-        case 4:
-            removePlaylist(playlist);
-            break;
-        default:
-            cout << "Entrada inválida \n";
-            break;
-    }
-}
-
-void System::showFollowedArtistsOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Ver músicas do artista!\n";
-    inicio += "2. Ouvir o artista desejado!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    string artista = getInput("Digite a opção de sua escolha: ");
-    
-    findArtist(artista);
-
-    if (W == 1) {
-        getArtistMusics(artista);
-    } else if (W == 2) {
-        listenArtist(artista);
-    } else {
-        cout << "Entrada inválida \n";
-    }
-}
-
-        
-void System::showArtistOptions() {
-    string inicio = "--------------------------------------------------\n\n";
-    inicio += "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Ver suas músicas!\n";
-    inicio += "2. Ver seus álbuns!\n";
-    inicio += "3. Publicar música!\n";
-    inicio += "4. Publicar álbum!\n";
-    inicio += "5. Ver número de ouvintes que ouviram suas músicas!\n";
-
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    try {
-        string album;
-        string artista;
-        string musica;
-        string playlist;
-        string genre;
-        string lyrics; 
-        string duration; 
-
-        switch (W) {
-            case 1:
-                showArtistMusicOptions();
-                break;
-            case 2:
-                showArtistAlbumOptions();
-                break;
-            case 3:
-                createMusic();
-                
-                break;
-            case 4:
-                
-                createAlbum();
-                break;
-            case 5:
-                listenersNumber();
-                break;
-            default:
-                cout << "Entrada inválida \n";
-                break;
-        }
-    } catch (const runtime_error& err) {
-        cerr << err.what() << endl;
-    }
-}
-
-void System::showArtistMusicOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Ouvir música desejada!\n";
-    inicio += "2. Apagar música!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    string musica = getInput("Digite o nome da música: ");
-
-    findMusic(musica);
-
-    if (W == 1) {
-        playMusic(musica);
-    } else if (W == 2) {
-        deleteMusic(musica);
-    } else {
-        cout << "Entrada inválida \n";
-    }
-}
-
-void System::showArtistAlbumOptions() {
-    string inicio = "-------------- DIGITE A AÇÃO DESEJADA -------------\n\n";
-    inicio += "1. Adicionar música no álbum!\n";
-    inicio += "2. Excluir álbum!\n";
-    cout << inicio << endl;
-
-    string opcao = getInput("Digite a opção de sua escolha: ");
-    clearScreen();
-
-    int W = 0;
-    try {
-        W = stoi(opcao); // string to int
-    } catch (...) {
-        cout << "Entrada inválida \n";
-    }
-
-    string album = getInput("Digite o nome do álbum: ");
-    
-    findAlbum(album);
-
-    if (W == 1) {
-        string musica = getInput("Digite o nome da música a ser adicionada no álbum: ");
-        addMusicToAlbum(musica, album);
-    } else if (W == 2) {
-        deleteAlbum(album);
-    } else {
-        cout << "Entrada inválida \n";
-    }
-}

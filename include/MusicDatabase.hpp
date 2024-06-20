@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Music.hpp"
+#include <string>
 
 class MusicDatabase {
 private:
@@ -11,7 +12,10 @@ private:
 public:
     ~MusicDatabase();
     void addMusic(Music* music);
+    void removeMusicById(int id);
     Music* searchMusicById(int id) const;
+    void displayAllMusics() const;
 };
 
 #endif // MUSICDATABASE_H
+
