@@ -3,23 +3,15 @@
 
 #include "Song.hpp"
 
+using std::string;
+
 class Song_pt : public Song {
-    private:
-        string pt_lyrics;      /** Song's lyrics in portuguese, used to simulate the playback. */
+public:
+    Song_pt(const string &title, const string &artist, const string &lyrics_pt);
+    string getLyrics() const override;
 
-    public:
-        Song_pt(int id, string name, string artist, string genre, string pt_lyrics);
-        void getLyrics() override;
-        
-}
-
-
-
-
-
-
-
-
-
+private:
+    string lyrics;
+};
 
 #endif

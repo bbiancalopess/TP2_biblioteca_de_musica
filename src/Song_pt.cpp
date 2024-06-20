@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+using namespace std;
 
-Song_pt::Song_pt(int id, string name, string artist, string genre, string pt_lyrics)
-    : Song(id, name, artist, genre), pt_lyrics(pt_lyrics) {}
+Song_pt::Song_pt(const string &title, const string &artist, const string &lyrics_pt)
+    : Song(title, artist) {}
+
+string Song_pt::getLyrics() const {
+    return lyrics_pt;
+}
